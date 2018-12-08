@@ -1,0 +1,192 @@
+// Modules to control application life and create native browser window
+const {app, BrowserWindow, ipcMain} = require('electron')
+const electron = require('electron')
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow
+
+function createWindow () {
+  // Create the browser window.
+  mainWindow = new BrowserWindow( {show: false} )
+
+  // and load the index.html of the app.
+  mainWindow.loadFile('source/index.html')
+
+  // Open the DevTools.
+  // mainWindow.webContents.openDevTools()
+
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
+    app.quit();
+  })
+}
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', () => {
+  createWindow()
+  createPswWindow()
+})
+
+let pswWin;
+
+function createPswWindow() {
+  if (pswWin) {
+    if (pswWin.isMinimized()) {
+      pswWin.restore();
+    }
+    pswWin.focus();
+  } else {
+    pswWin = new BrowserWindow({width: 300, height: 350, title: 'Login'})
+    pswWin.loadFile('source/pswWindow/pswWin.html')
+  }
+
+  pswWin.setMenu(null)
+
+  pswWin.on('close', () => {
+    pswWin = null;
+    app.quit();
+  })
+}
+
+let key;
+let cc;
+
+ipcMain.on('save-data', (e, auth, answerId) => {
+  cc = answerId;
+  key = auth;
+  mainWindow.maximize()
+  mainWindow.show()
+})
+
+ipcMain.on('open-smt-window', (e) => {
+  createSmtWindow();
+})
+
+ipcMain.on('prepare-post', (e) => {
+  mainWindow.webContents.send('get-post-code')
+})
+
+ipcMain.on('post-data', (e, post) => {
+  pswWin.webContents.send('post-data', post)
+})
+
+ipcMain.on('post-success', (e) => {
+  pswWin.close();
+})
+
+ipcMain.on('news-page-update', (e, data, key) => {
+  createprevWin(data, key);
+})
+
+let linkWin;
+
+function createLinkWin(text) {
+  if (linkWin) {
+    if (linkWin.isMinimized()) {
+      linkWin.restore();
+    }
+      linkWin.focus();
+  } else {
+    linkWin = new BrowserWindow({width: 300, height: 275, title: 'Insert Link'})
+    linkWin.loadFile('source/linkWindow/linkWin.html')
+  }
+
+  linkWin.setMenu(null)
+
+  linkWin.webContents.on('dom-ready', (e) => {
+    linkWin.webContents.send('link-text', text)
+  })
+
+  linkWin.on('close', () => {
+    linkWin = null;
+  })
+}
+
+ipcMain.on('open-link-window', (e, text) => {
+  createLinkWin(text);
+})
+
+ipcMain.on('link-data', (e, url, text) => {
+  mainWindow.webContents.send('link-data', url, text)
+  linkWin.close()
+})
+
+let imgWin;
+
+function createImgWin() {
+  if (imgWin) {
+    if (imgWin.isMinimized()) {
+      imgWin.restore();
+    }
+    imgWin.focus();
+  } else {
+    imgWin = new BrowserWindow({width: 300, height: 275, title: 'Insert Image'})
+    imgWin.loadFile('source/imgWindow/imgWin.html')
+  }
+
+  imgWin.setMenu(null)
+
+  imgWin.on('close', () => {
+    imgWin = null;
+  })
+}
+
+ipcMain.on('open-img-window', (e, text) => {
+  createImgWin();
+})
+
+ipcMain.on('img-data', (e, url, size) => {
+  mainWindow.webContents.send('img-data', url, size)
+  imgWin.close()
+})
+
+let prevWin;
+
+function createprevWin(data, key) {
+  if (prevWin) {
+    if (prevWin.isMinimized()) {
+      prevWin.restore();
+    }
+    prevWin.focus();
+  } else {
+    prevWin = new BrowserWindow({title: 'Preview Page',})
+    prevWin.loadFile('source/prevWindow/prevWin.html')
+  }
+
+  //prevWin.setMenu(null)
+
+  prevWin.webContents.on('dom-ready', (e) => {
+    prevWin.webContents.send('new-post-data', data, key);
+  })
+
+  prevWin.on('close', () => {
+    pswWin = null;
+  })
+}
+
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+app.on('activate', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow()
+    createSplash()
+  }
+})
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.

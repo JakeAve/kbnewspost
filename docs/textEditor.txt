@@ -1,0 +1,319 @@
+//The preview shows on every keyup inside the headline and content
+document.querySelector('#headline').addEventListener('keyup', showPostPreview);
+document.querySelector('#content').addEventListener('keyup', showPostPreview);
+
+//The #fullHTML takes its information from the formatPost function, not the #content div directly. 
+//The preview and final code are all based off the #fullHTML.
+function showPostPreview() {
+    document.querySelector('#fullHTML').value = formatPost();
+    document.querySelector('#preview').innerHTML = document.querySelector('#fullHTML').value;
+    //document.querySelector('#nothing').value = document.querySelector('#content').innerHTML;
+    return formatPost()
+};
+
+//returns the headline combined with the post
+function formatPost() {
+    const h = document.querySelector('#headline').value;
+    const c = document.querySelector('#content').innerHTML;
+    const post = formatHeadline(h) + '\n' + formatContent(c) + '\n<hr>\n';
+    return post;
+};
+
+//returns the complete header 
+function formatHeadline(text) {
+    const categories = addCategory();
+    const timeStamp = formatTimeAndDate(cc);
+    const header = `<h4><a id="${timeStamp[1]}" name="${timeStamp[1]}"></a>${text} - ${timeStamp[0]} ${categories}</h4>`;
+    return header;
+};
+
+//uses the current time to create to return a unique timestamp and unique anchor. 
+//The months and timestamp can be modified for each market. 
+function formatTimeAndDate(cc) {
+    const d = new Date();
+    
+    const yyyy = `${d.getFullYear()}`;
+    const MM = d.getMonth() < 10 ? `0${d.getMonth() + 1}` : `${d.getMonth() + 1}`;
+    const dd = d.getDate() < 10 ? `0${d.getDate()}` : `${d.getDate()}`;
+    const hh = d.getHours() < 10 ? `0${d.getHours()}` : `${d.getHours()}`;
+    const mm = d.getMinutes() < 10 ? `0${d.getMinutes()}` : `${d.getMinutes()}`;
+    const ss = d.getSeconds() < 10 ? `0${d.getSeconds()}` : `${d.getSeconds()}`;
+    const aTagId = `${MM}-${dd}-${yyyy}at${hh}-${mm}-${ss}`;
+    
+    let months;
+    let month;
+    let hour;
+    let mid;
+    let timeStamp;
+    switch (cc) {
+        case '1717':
+            //us
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours() == 0 ? 12 : d.getHours() > 12 ? d.getHours() -12 : d.getHours();
+            mid = d.getHours() < 12 ? 'AM' : 'PM';
+            timeStamp = `${month} ${d.getDate()}, ${yyyy} | ${hour}:${mm} ${mid}`;
+            break;
+        case '2450':
+            //canada
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours() == 0 ? 12 : d.getHours() > 12 ? d.getHours() -12 : d.getHours();
+            mid = d.getHours() < 12 ? 'AM' : 'PM';
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm} ${mid}`;
+            break;
+        case '2451':
+            //mexico
+            months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            month = months[d.getMonth()];
+            hour = d.getHours() == 0 ? 12 : d.getHours() > 12 ? d.getHours() -12 : d.getHours();
+            mid = d.getHours() < 12 ? 'AM' : 'PM';
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm} ${mid}`;
+            break;
+        case '6205':
+            //ecuador
+            months = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '4298':
+            //hong kong';
+            months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()}日 ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '4216':
+            //'malaysia';
+            months = ['Januari', 'Februari', 'Mac', 'April', 'Mei', 'Jun', 'Julai', 'Ogos', 'September', 'Oktober', 'November', 'Disember'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '3770':
+            //singapore';
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '4286':
+            //taiwan';
+            months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()}日 ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '4267':
+            //indonesia';
+            months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '5711':
+            //japan';
+            months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()}日 ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '4270':
+            //australia';
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours() == 0 ? 12 : d.getHours() > 12 ? d.getHours() -12 : d.getHours();
+            mid = d.getHours() < 12 ? 'AM' : 'PM';
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm} ${mid}`;
+            break;
+        case '4439':
+            //Europe';
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()} ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        case '6189':
+            //china';
+            months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            month = months[d.getMonth()];
+            hour = d.getHours();
+            timeStamp = `${d.getDate()}日 ${month}, ${yyyy} | ${hour}:${mm}`;
+            break;
+        default:
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            month = months[d.getMonth()];
+            hour = d.getHours() == 0 ? 12 : d.getHours() > 12 ? d.getHours() -12 : d.getHours();
+            mid = d.getHours() < 12 ? 'AM' : 'PM';
+            timeStamp = `${month} ${d.getDate()}, ${yyyy} | ${hour}:${mm} ${mid}`;
+    };
+    
+    const arr = [timeStamp, aTagId];
+    return arr;
+};
+
+//This function uses regExs to make a text/plain feel, but it's not needed yet
+/*document.querySelector('#content').addEventListener('paste', (e) => {
+    const div = e.target;
+    showPostPreview();
+    setTimeout(() => {
+        div.innerHTML = formatContent(removeStyles(div.innerHTML));
+        showPostPreview();
+    }, 1000);
+});*/
+
+
+//All pastes in #content are text/plain
+document.querySelector('#content').addEventListener('paste', (e) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData('text/plain');
+    document.execCommand('insertText', false, text);
+});
+
+//This takes the code from the #content div performs several functions
+function formatContent(text) {
+    let code = text;
+    //code = removeStyles(code);
+    //code = makePretty(code);
+    //code = removeRandomListGlitch(code);
+    code = convertToPlain(code);
+    code = reduceHeadings(code);
+    const firstTag = code.search(/<[^font|a|u>|b>|\/]/);
+    code = firstTag != -1 ? `<div>${code.slice(0, firstTag)}</div>\n${code.slice(firstTag)}` : `<div>${code}</div>`;
+    //code = code.replace(/<div>\n*<\/div>/g, '');
+    return code;
+};
+
+function convertToPlain(rtf) {
+    rtf = rtf.replace(/\\par[d]?/g, "");
+    return rtf.replace(/\{\*?\\[^{}]+}|[{}]|\\\n?[A-Za-z]+\n?(?:-?\d+)?[ ]?/g, "").trim();
+};
+
+//removed span tags and several types of attributes
+function removeStyles(code) {
+    const bad = /<\/span>|<span[^]+?>|\s+(style|class|id|dir|data-ft|rel|data-lynx-mode|data-lynx-uri)=".*?"|<!--.*-->|&nbsp;/igm;
+    const noStyle = code.replace(bad, '');
+    return noStyle;
+};
+
+//adds newlines after new opening tags
+function makePretty(ugly) {
+    //const tags = /<\/*(div|ul|ol|li|p|h[1-6])>\s*</g;
+    //const tags = /<\/*(div|ul|ol|li|p|h[1-6]).*?>\s*</g;
+    const tags = /<.*?><|<\/.*?></g;
+    let match;
+    while ((match = tags.exec(ugly)) !== null) {
+        ugly = ugly.slice(0, (tags.lastIndex - 1)) + '\n' + ugly.slice((tags.lastIndex - 1));
+    };
+    const pretty = ugly.replace(/\n+/g, '\n');
+    return pretty;
+};
+
+//as intented
+function removeRandomListGlitch(code) {
+    const glitch = /(<br>|<\/font>)\n/g;
+    const fixed = code.replace(glitch, '');
+    return fixed;
+};
+
+//makes sure that any h tag is changed to h5
+function reduceHeadings(code) {
+    const headings = /<h[1-6]/g;
+    const reduced = code.replace(headings, '<h5');
+    return reduced;
+};
+
+function makeBold() {
+    document.execCommand('bold', true);
+    showPostPreview();
+};
+
+function makeUnderline() {
+    document.execCommand('underline', true);
+    showPostPreview();
+};
+
+function makeRed() {
+    document.execCommand('foreColor', true, '#ff0000');
+    showPostPreview();
+};
+
+function removeRed() {
+    document.execCommand('foreColor', true, '#000000');
+    colorShift();
+    showPostPreview();
+};
+
+//temporarily changes the color of the color change icon
+function colorShift() {
+    const red = document.querySelector('#red');    
+    red.style.color = '#000000';
+    setTimeout(() => {
+        red.style.color = '#ff0000';
+    }, 1000);
+};
+
+function makeUL() {
+    document.execCommand('insertUnorderedList', true);
+    showPostPreview();
+};
+
+function makeOL() {
+    document.execCommand('insertOrderedList', true);
+    showPostPreview();
+};
+
+//makes the link and makes it open in new window
+function makeLink(url, text) {
+    const selection = document.getSelection();
+    document.execCommand('createLink', true, url);
+    selection.anchorNode.parentElement.target = '_blank';
+    selection.anchorNode.parentElement.innerHTML = text;
+    showPostPreview();
+};
+
+function makeImg(url, width) {
+    document.execCommand('insertImage', true, url);
+    const img = document.querySelector(`img[src="${url}"]`);
+    img.style.width = `${width}%`;
+    showPostPreview();
+};
+
+//toggle between the ABC and </> windows
+function editCode(id) {
+    id.classList.toggle('selectedswitch');
+    id.previousElementSibling.classList.toggle('selectedswitch');
+    document.querySelector('#fullHTML').style.display = 'block';
+    document.querySelector('#content').style.display = 'none';
+};
+
+function editText(id) {
+    id.classList.toggle('selectedswitch');
+    id.nextElementSibling.classList.toggle('selectedswitch');
+    document.querySelector('#content').style.display = 'block';
+    document.querySelector('#fullHTML').style.display = 'none';
+};
+
+//this adds the icons for the headers
+function addCategory() {
+    const list = document.querySelector('#headicons');
+    const titles = [];
+    const srcs = [];
+    for (let i = 0; i < list.length; i ++) {
+        if (list[i].checked) {
+            titles.push(list[i].previousElementSibling.title);
+            srcs.push(list[i].previousElementSibling.src);
+        }
+    }
+    let output = '';
+    titles.forEach((val, i) => {
+        output += `<img src="${srcs[i]}" title="${val}" alt="${val}" style="margin-left: 5px;">`;
+    });
+    return output
+};
+
+const checkBoxes = document.querySelectorAll('input[type=checkbox]');
+for (let i = 0; i < checkBoxes.length; i ++) {
+    checkBoxes[i].addEventListener('change', showPostPreview);
+}

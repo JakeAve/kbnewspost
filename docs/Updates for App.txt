@@ -1,0 +1,41 @@
+Missing
+-The insert image could be easier to use
+-Red text issue when you do a lot of red text
+-Be able to save and upload html files
+-unfocus from the link window messes up the link and deletes all text
+-TL only permission 
+- image sizes should be addressed
+-Context menu on text editor
+-links and imgs past possibility
+
+Finished 0.9.6
+-US has admin access
+-snapcomm formatting
+-"updated" check mark
+-made external js fild for new countries
+-multiple posts supported
+-reformatted email 
+-Style tags for underline on Links
+
+Finished 0.9.5
+-html to text changer color
+-Links need to be underlined. ---THis used <u> rather than styling for the time being
+-replace divs with ps
+-undo error does not always go off
+--Invalid market code goes in
+-Change Market Button
+-The app should not delete data when timed out 
+-Character types chinese japanese etc 
+-Don't allow to publish if there are less than 10 characters in either field.
+-Glitch with preview window open.
+-included philippines
+
+
+
+
+
+
+
+
+
+CHECK THE MAIL IS ON BEFORE DISTRIBUTING

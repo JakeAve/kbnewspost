@@ -1,0 +1,96 @@
+electron-builder
+
+  • electron-builder version=20.34.0
+  • loaded configuration file=package.json ("build" field)
+  • writing effective config file=dist\builder-effective-config.yaml
+  • no native production dependencies
+  • packaging       platform=win32 arch=x64 electron=3.0.9 appOutDir=dist\win-unpacked
+  • building        target=nsis file=dist\KB News Post Setup 1.0.0.exe archs=x64 oneClick=true
+  • building block map blockMapFile=dist\KB News Post Setup 1.0.0.exe.blockmap
+PS C:\Users\jaavery\Code\News Post\News Post Dev> npm run dist
+
+> kbasenewspost@0.9.0 dist C:\Users\jaavery\Code\News Post\News Post Dev
+> electron-builder
+
+  • electron-builder version=20.34.0
+  • loaded configuration file=package.json ("build" field)
+  • writing effective config file=dist\builder-effective-config.yaml
+  • no native production dependencies
+  • packaging       platform=win32 arch=x64 electron=3.0.9 appOutDir=dist\win-unpacked
+  • default Electron icon is used reason=application icon is not set
+  • building        target=nsis file=dist\KBase News Post Setup 0.9.0.exe archs=x64 oneClick=true
+cannot find specified resource "assets/icons/icon.ico", nor relative to "C:\Users\jaavery\Code\News Post\News Post Dev\build", neither relative to project dir ("C:\Users\jaavery\Code\News Post\News Post Dev")
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! kbasenewspost@0.9.0 dist: `electron-builder`
+npm ERR! Exit status 1
+npm ERR!
+npm ERR! Failed at the kbasenewspost@0.9.0 dist script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\jaavery\AppData\Roaming\npm-cache\_logs\2018-11-15T22_15_34_366Z-debug.log
+PS C:\Users\jaavery\Code\News Post\News Post Dev> npm run dist
+
+> kbasenewspost@0.9.0 dist C:\Users\jaavery\Code\News Post\News Post Dev
+> electron-builder
+
+  • electron-builder version=20.34.0
+  • loaded configuration file=package.json ("build" field)
+  • writing effective config file=dist\builder-effective-config.yaml
+  • no native production dependencies
+  • packaging       platform=win32 arch=x64 electron=3.0.9 appOutDir=dist\win-unpacked
+Error: EPERM: operation not permitted, rename 'C:\Users\jaavery\Code\News Post\News Post Dev\dist\win-unpacked\electron.exe' -> 'C:\Users\jaavery\Code\News Post\News Post Dev\dist\win-unpacked\KBase News Post.exe'
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\electron\ElectronFramework.ts:73:11
+    at Generator.next (<anonymous>)
+From previous event:
+    at _beforeCopyExtraFiles (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\out\electron\ElectronFramework.js:162:32)
+    at beforeCopyExtraFiles (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\out\electron\ElectronFramework.js:111:32)
+    at beforeCopyExtraFiles (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\electron\ElectronFramework.ts:151:14)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\platformPackager.ts:222:13
+    at Generator.next (<anonymous>)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+    at processImmediate [as _immediateCallback] (timers.js:745:5)
+From previous event:
+    at WinPackager.doPack (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\platformPackager.ts:166:165)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\platformPackager.ts:112:16
+    at Generator.next (<anonymous>)
+From previous event:
+    at WinPackager.pack (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\platformPackager.ts:110:95)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:379:24
+    at Generator.next (<anonymous>)
+    at xfs.stat (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\fs-extra-p\node_modules\fs-extra\lib\mkdirs\mkdirs.js:56:16)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\graceful-fs\polyfills.js:287:18
+    at FSReqWrap.oncomplete (fs.js:153:5)
+From previous event:
+    at Packager.doBuild (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:345:24)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:315:57
+    at Generator.next (<anonymous>)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\graceful-fs\graceful-fs.js:99:16
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\graceful-fs\graceful-fs.js:43:10
+    at FSReqWrap.oncomplete (fs.js:135:15)
+From previous event:
+    at Packager._build (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:284:133)
+    at C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:280:23
+    at Generator.next (<anonymous>)
+    at runCallback (timers.js:810:20)
+    at tryOnImmediate (timers.js:768:5)
+    at processImmediate [as _immediateCallback] (timers.js:745:5)
+From previous event:
+    at Packager.build (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\packager.ts:237:14)
+    at build (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\app-builder-lib\src\index.ts:59:28)
+    at build (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\electron-builder\src\builder.ts:227:10)
+    at then (C:\Users\jaavery\Code\News Post\News Post Dev\node_modules\electron-builder\src\cli\cli.ts:46:19)
+    at <anonymous>
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! kbasenewspost@0.9.0 dist: `electron-builder`
+npm ERR! Exit status 1
+npm ERR!
+npm ERR! Failed at the kbasenewspost@0.9.0 dist script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\jaavery\AppData\Roaming\npm-cache\_logs\2018-11-15T22_16_26_959Z-debug.log
+PS C:\Users\jaavery\Code\News Post\News Post Dev>
