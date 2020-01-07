@@ -1,0 +1,37 @@
+{
+  "name": "kbasenewspost",
+  "version": "0.9.7",
+  "description": "Create a post to KBase news and updates",
+  "main": "main.js",
+  "build": {
+    "appId": "com.kbnewspost",
+    "productName": "KBase News Post",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icons/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "assets/icons/icon.ico",
+      "uninstallerIcon": "assets/icons/icon.ico",
+      "runAfterFinish": true
+    }
+  },
+  "dependencies": {
+    "nodemailer": "^4.6.8",
+    "npm": "^6.4.1"
+  },
+  "devDependencies": {
+    "electron": "^3.0.9",
+    "electron-builder": "^20.34.0"
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron ."
+  },
+  "author": "Jacob Avery",
+  "license": "MIT"
+}
